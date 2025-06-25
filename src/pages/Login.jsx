@@ -79,6 +79,11 @@ const handleSubmit = async (e) => {
             Login
           </button>
         </form>
+
+
+        <p className="text-center text-sm mt-4 text-gray-500 dark:text-gray-400">
+          New to Taskify? <a href="/register" className="text-indigo-500 hover:underline">Register</a>
+        </p>
       </div>
     </motion.div>
   );
