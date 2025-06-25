@@ -29,12 +29,12 @@ export default function CreateTodo({fetchTodos}) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+    <div className=" flex items-center justify-center bg-gray-100 dark:bg-gray-900">
       <form
         onSubmit={handleSubmit}
-        className="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full max-w-md space-y-6"
+        className="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full  space-y-6"
       >
-        <h2 className="text-2xl font-semibold text-gray-800 dark:text-white text-center">
+        <h2 className="text-3xl font-bold text-gray-800 dark:text-white text-center">
           Create a Todo
         </h2>
 

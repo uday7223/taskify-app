@@ -22,16 +22,15 @@ export default function Dashboard() {
     }
   };
   return (
-    <div className="p-4 md:p-8">
-      <div className="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0">
+    <div className="p-1 mt-10 md:p-8">
+      <div className="flex flex-col md:flex-row gap-6">
         {/* CreateTodo Form */}
-        <div className="md:w-1/2 w-full">
+        <div className="w-full md:w-1/3 shadow-lg rounded-2xl p-6 bg-white dark:bg-gray-800">
           <CreateTodo fetchTodos={fetchTodos}/>
         </div>
 
         {/* Todo List */}
-        <div className="md:w-1/2 w-full">
-          <h2 className="text-xl font-semibold mb-4">Your Todos</h2>
+        <div className="w-full md:w-2/3 bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6">
           <TodoList fetchTodos={fetchTodos} todos={todos}/>
         </div>
       </div>
