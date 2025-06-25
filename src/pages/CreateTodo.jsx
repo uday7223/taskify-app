@@ -3,10 +3,11 @@ import { FiCalendar, FiFileText } from "react-icons/fi";
 import axios from "../services/api"; // use pre-configured axios instance
 import { useNavigate } from "react-router-dom";
 
-export default function CreateTodo() {
+export default function CreateTodo({fetchTodos}) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,8 +19,9 @@ export default function CreateTodo() {
           Authorization: `Bearer ${token}`,
         },
       });
+      fetchTodos(); // refresh todo list
       alert("Todo created successfully!");
-      navigate("/"); // redirect if needed
+      // navigate("/"); // redirect if needed
     } catch (err) {
       console.error(err);
       alert("Failed to create todo");

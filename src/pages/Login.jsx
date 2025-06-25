@@ -2,12 +2,14 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiMail, FiLock } from "react-icons/fi";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -28,6 +30,7 @@ const handleSubmit = async (e) => {
     const token = response.data.access_token;
     localStorage.setItem("token", token);
     setSuccess("Login successful!");
+    navigate("/dashboard"); // Redirect to dashboard or another page after successful login
   } catch (error) {
     setErrorMsg("Invalid credentials.");
   }

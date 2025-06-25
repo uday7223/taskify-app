@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import axios from "../services/api";
 import { FiCheckCircle, FiTrash2 } from "react-icons/fi";
 
-export default function TodoList() {
-  const [todos, setTodos] = useState([]);
+export default function TodoList({fetchTodos, todos}) {
+  // const [todos, setTodos] = useState([]);
 
-  const fetchTodos = async () => {
-    const token = localStorage.getItem("token");
-    try {
-      const res = await axios.get("/todos", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setTodos(res.data);
-    } catch (err) {
-      console.error("Error fetching todos:", err);
-    }
-  };
+  // const fetchTodos = async () => {
+  //   const token = localStorage.getItem("token");
+  //   try {
+  //     const res = await axios.get("/todos", {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     setTodos(res.data);
+  //   } catch (err) {
+  //     console.error("Error fetching todos:", err);
+  //   }
+  // };
 
   const markComplete = async (id) => {
     const token = localStorage.getItem("token");
