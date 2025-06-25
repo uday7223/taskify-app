@@ -5,6 +5,9 @@ export default function Navbar() {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token");
+ 
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     setShowModal(false);
@@ -19,15 +22,22 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-6">
-          <Link to="/dashboard" className="hover:text-purple-300 transition font-medium">
+         
+         {  token && (
+            <>
+             <Link to="/dashboard" className="hover:text-purple-300 transition font-medium">
             Dashboard
           </Link>
-          <button
+             <button
             onClick={() => setShowModal(true)}
             className="bg-gradient-to-r from-purple-500 to-indigo-500 px-4 py-1 rounded-full font-medium hover:opacity-90 transition"
           >
             Logout
           </button>
+            </>
+         )
+
+         }
         </div>
       </nav>
 
