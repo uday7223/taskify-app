@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiMail, FiLock, FiUser, FiEye, FiEyeOff } from "react-icons/fi";
 import API from "../services/api"
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -107,7 +108,7 @@ export default function Register() {
 
         {/* Toggle Dark Mode Hint */}
         <p className="text-center text-sm mt-4 text-gray-500 dark:text-gray-400">
-          Already have an account? <a href="/" className="text-indigo-500 hover:underline">Login</a>
+          Already have an account? <Link to="/" className="text-indigo-500 ms-1 hover:underline">Login</Link>
         </p>
       </motion.div>
     </div>

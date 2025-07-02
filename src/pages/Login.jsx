@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiMail, FiLock } from "react-icons/fi";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -82,7 +82,9 @@ const handleSubmit = async (e) => {
 
 
         <p className="text-center text-sm mt-4 text-gray-500 dark:text-gray-400">
-          New to Taskify? <a href="/register" className="text-indigo-500 hover:underline">Register</a>
+          New to Taskify? 
+
+          <Link to="/register" className="text-indigo-500 ms-1 hover:underline">Sign Up</Link>
         </p>
       </div>
     </motion.div>
