@@ -22,8 +22,8 @@ export default function Dashboard() {
     }
   };
   return (
-    <div className="p-1 mt-10 md:p-8">
-      <div className="flex flex-col md:flex-row gap-6">
+    <div className="p-1 mt-10 md:p-8 py-6 bg-gray-950 min-h-screen ">
+      <div className="flex flex-col md:flex-row gap-2">
         {/* CreateTodo Form */}
         <div className="w-full md:w-1/3 shadow-lg rounded-2xl p-6 bg-white dark:bg-gray-800">
           <CreateTodo fetchTodos={fetchTodos}/>

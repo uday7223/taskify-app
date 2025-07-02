@@ -17,7 +17,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="backdrop-blur-xl bg-black/30 text-white shadow-md px-6 py-3 flex justify-between items-center fixed top-0 w-full z-50">
-        <Link to="/" className="text-2xl font-semibold tracking-wide hover:text-purple-300 transition">
+        <Link to="#" className="text-2xl font-semibold tracking-wide hover:text-purple-300 transition">
           Taskify
         </Link>
 

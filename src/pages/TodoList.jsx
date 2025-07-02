@@ -52,8 +52,8 @@ export default function TodoList({fetchTodos, todos}) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
-      <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
+    <div className=" bg-gray-100 dark:bg-gray-900 p-6">
+      <h1 className="text-3xl font-bold text-center  text-gray-800 dark:text-white mb-6 mt-5">
         Your Tasks
       </h1>
 
@@ -67,7 +67,7 @@ export default function TodoList({fetchTodos, todos}) {
         {todos.map((todo) => (
           <div
             key={todo.id}
-            className={`flex items-center justify-between p-4 rounded-xl shadow-sm ${
+            className={`flex items-center justify-between p-4 shadow-indigo-300 rounded-2xl shadow-sm ${
               todo.completed
                 ? "bg-green-100 dark:bg-green-800"
                 : "bg-white dark:bg-gray-800"
