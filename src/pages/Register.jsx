@@ -35,9 +35,9 @@ export default function Register() {
       setError(err.response?.data?.detail || "Registration failed");
 
     } finally {
-      // setUsername("");
-      // setEmail("");
-      // setPassword("");
+      setUsername("");
+      setEmail("");
+      setPassword("");
     }
   };
 
