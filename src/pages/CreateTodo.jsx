@@ -2,12 +2,15 @@ import { useState } from "react";
 import { FiCalendar, FiFileText } from "react-icons/fi";
 import axios from "../services/api"; // use pre-configured axios instance
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "../context/AlertContext";
 
 export default function CreateTodo({fetchTodos}) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   // const navigate = useNavigate();
 
+  const {showAlert} = useAlert();
+  const today = new Date().toLocaleDateString('en-CA');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,11 +23,11 @@ export default function CreateTodo({fetchTodos}) {
         },
       });
       fetchTodos(); // refresh todo list
-      alert("Todo created successfully!");
+      // alert("Todo created successfully!");
+      showAlert("Todo created successfully", "success");      
       // navigate("/"); // redirect if needed
     } catch (err) {
-      console.error(err);
-      alert("Failed to create todo");
+        showAlert( `${err.response?.data?.detail?.[0]?.msg  || "Something went wrong"}`, "error");
     }finally{
       setTitle("");
       setDate("");  
@@ -50,6 +53,7 @@ export default function CreateTodo({fetchTodos}) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            maxLength={50}
           />
         </div>
 
@@ -58,6 +62,7 @@ export default function CreateTodo({fetchTodos}) {
           <input
             type="date"
             className="w-full pl-10 pr-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none"
+            min={today}
             value={date}
             onChange={(e) => setDate(e.target.value)}
             required

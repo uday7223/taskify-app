@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CreateTodo from "../pages/CreateTodo";
 import TodoList from "../pages/TodoList";
-import axios from "../services/api";
+import API from "../services/api";
 
 
 export default function Dashboard() {
@@ -11,7 +11,7 @@ export default function Dashboard() {
     const fetchTodos = async () => {
     const token = localStorage.getItem("token");
     try {
-      const res = await axios.get("/todos", {
+      const res = await API.get("/todos", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

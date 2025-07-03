@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "../services/api";
+import API from "../services/api";
 import { FiCheckCircle, FiTrash2 } from "react-icons/fi";
 
 export default function TodoList({fetchTodos, todos}) {
@@ -22,7 +22,7 @@ export default function TodoList({fetchTodos, todos}) {
   const markComplete = async (id) => {
     const token = localStorage.getItem("token");
     try {
-      await axios.put(`/todos/${id}`, {}, {
+      await API.put(`/todos/${id}`, {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,7 +36,7 @@ export default function TodoList({fetchTodos, todos}) {
   const deleteTodo = async (id) => {
     const token = localStorage.getItem("token");
     try {
-      await axios.delete(`/todos/${id}`, {
+      await API.delete(`/todos/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,9 +74,11 @@ export default function TodoList({fetchTodos, todos}) {
             }`}
           >
             <div>
-              <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
-                {todo.title}
-              </h2>
+           <h2 className="text-lg font-semibold text-gray-800 dark:text-white break-words max-w-[200px] sm:max-w-none  sm:whitespace-normal">
+  {todo.title}
+</h2>
+
+
               <p className="text-sm text-gray-500 dark:text-gray-300">
                 Due: {todo.date}
               </p>
