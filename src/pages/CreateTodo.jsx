@@ -25,6 +25,9 @@ export default function CreateTodo({fetchTodos}) {
     } catch (err) {
       console.error(err);
       alert("Failed to create todo");
+    }finally{
+      setTitle("");
+      setDate("");  
     }
   };
 
