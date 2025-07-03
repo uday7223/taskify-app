@@ -16,7 +16,7 @@ export default function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setError("");
+    setError(""); 
 
     try {
       const response = await API.post("/register", {

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FiMail, FiLock } from "react-icons/fi";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import API from "../services/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ const handleSubmit = async (e) => {
     formData.append("password", password);
     
 
-    const response = await axios.post("https://fastapi-todo-backend-production.up.railway.app/login", formData, {
+    const response = await API.post("/login", formData, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
