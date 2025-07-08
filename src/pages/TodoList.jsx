@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
-import { FiCheckCircle, FiTrash2 } from "react-icons/fi";
+import { FiCheckCircle, FiTrash2, FiRepeat } from "react-icons/fi";
 
 export default function TodoList({fetchTodos, todos}) {
+  const [showDeleteModal, setShowDeleteModal] = useState();
   // const [todos, setTodos] = useState([]);
 
   // const fetchTodos = async () => {
@@ -74,7 +75,7 @@ export default function TodoList({fetchTodos, todos}) {
             }`}
           >
             <div>
-           <h2 className="text-lg font-semibold text-gray-800 dark:text-white break-words max-w-[200px] sm:max-w-none  sm:whitespace-normal">
+           <h2 className={`text-lg font-semibold text-gray-800 dark:text-white break-words max-w-[200px] sm:max-w-none  sm:whitespace-normal ${todo.completed ? "line-through" : ""}`}>
   {todo.title}
 </h2>
 
@@ -85,22 +86,48 @@ export default function TodoList({fetchTodos, todos}) {
             </div>
 
             <div className="flex gap-3">
-              {!todo.completed && (
                 <button
                   onClick={() => markComplete(todo.id)}
-                  className="text-green-600 hover:text-green-800 transition"
                   title="Mark Complete"
                 >
-                  <FiCheckCircle size={20} />
+              {todo.completed ?(
+                  <FiRepeat size={20}                   className="text-black hover:text-gray-800 active:text-white transition"/>
+
+              ):
+              <FiCheckCircle size={20} className="text-green-500 hover:text-green-700 transition active:text-white"/>
+              }
+
+
                 </button>
-              )}
               <button
-                onClick={() => deleteTodo(todo.id)}
+                onClick={() => setShowDeleteModal(todo.id)}
                 className="text-red-500 hover:text-red-700 transition"
                 title="Delete"
               >
                 <FiTrash2 size={20} />
               </button>
+
+              {showDeleteModal === todo.id && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                  <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-2xl w-full max-w-xs">
+                    <h2 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Confirm Delete</h2>
+                    <div className="flex justify-center gap-4">
+                      <button
+                        onClick={() => { setShowDeleteModal(null); deleteTodo(todo.id); }}
+                        className="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition"
+                      >
+                        Yes
+                      </button>
+                      <button
+                        onClick={() => setShowDeleteModal(null)}
+                        className="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition"
+                      >
+                        No
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         ))}
