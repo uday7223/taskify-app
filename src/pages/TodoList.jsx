@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
 import { FiCheckCircle, FiTrash2, FiRepeat } from "react-icons/fi";
+import { FaCheckCircle } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 
-export default function TodoList({fetchTodos, todos}) {
+export default function TodoList({ fetchTodos, todos }) {
   const [showDeleteModal, setShowDeleteModal] = useState();
   // const [todos, setTodos] = useState([]);
 
@@ -23,11 +25,15 @@ export default function TodoList({fetchTodos, todos}) {
   const markComplete = async (id) => {
     const token = localStorage.getItem("token");
     try {
-      await API.put(`/todos/${id}`, {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await API.put(
+        `/todos/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       fetchTodos(); // refresh list
     } catch (err) {
       console.error("Error marking complete:", err);
@@ -75,10 +81,13 @@ export default function TodoList({fetchTodos, todos}) {
             }`}
           >
             <div>
-           <h2 className={`text-lg font-semibold text-gray-800 dark:text-white break-words max-w-[200px] sm:max-w-none  sm:whitespace-normal ${todo.completed ? "line-through" : ""}`}>
-  {todo.title}
-</h2>
-
+              <h2
+                className={`text-lg font-semibold text-gray-800 dark:text-white break-words max-w-[200px] sm:max-w-none  sm:whitespace-normal ${
+                  todo.completed ? "line-through" : ""
+                }`}
+              >
+                {todo.title}
+              </h2>
 
               <p className="text-sm text-gray-500 dark:text-gray-300">
                 Due: {todo.date}
@@ -86,49 +95,54 @@ export default function TodoList({fetchTodos, todos}) {
             </div>
 
             <div className="flex gap-3">
-                <button
-                  onClick={() => markComplete(todo.id)}
-                  title="Mark Complete"
-                >
-              {todo.completed ?(
-                  <FiRepeat size={20}                   className="text-black hover:text-gray-800 active:text-white transition"/>
-
-              ):
-              <FiCheckCircle size={20} className="text-green-500 hover:text-green-700 transition active:text-white"/>
-              }
-
-
-                </button>
+              <button
+                onClick={() => markComplete(todo.id)}
+                title="Mark Complete"
+              >
+                {todo.completed ? (
+                  <FiRepeat
+                    size={20}
+                    className="text-black hover:text-gray-800 active:text-white transition"
+                  />
+                ) : (
+                  <FiCheckCircle
+                    size={20}
+                    className="text-green-500 hover:text-green-700 transition active:text-white"
+                  />
+                )}
+              </button>
               <button
                 onClick={() => setShowDeleteModal(todo.id)}
-                className="text-red-500 hover:text-red-700 transition"
+                className="text-red-500 relative hover:text-red-700 transition"
                 title="Delete"
               >
                 <FiTrash2 size={20} />
               </button>
 
-              {showDeleteModal === todo.id && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-                  <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-2xl w-full max-w-xs">
-                    <h2 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Confirm Delete</h2>
+             
+            </div>
+             {showDeleteModal === todo.id && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 ">
+                  <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-2xl max-w-xs">
+                    <h2 className="text-lg text-center font-semibold mb-4 text-gray-800 dark:text-white">
+                      Confirm Delete
+                    </h2>
                     <div className="flex justify-center gap-4">
                       <button
-                        onClick={() => { setShowDeleteModal(null); deleteTodo(todo.id); }}
-                        className="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition"
+                        onClick={() => {
+                          setShowDeleteModal(null);
+                          deleteTodo(todo.id);
+                        }}
                       >
-                        Yes
+                        <FaCheckCircle className="text-green-500  hover:text-green-600 transition" size={20} />
                       </button>
-                      <button
-                        onClick={() => setShowDeleteModal(null)}
-                        className="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition"
-                      >
-                        No
+                      <button onClick={() => setShowDeleteModal(null)}>
+                        <MdCancel className="text-red-500 m-2 hover:text-red-600 transition" size={24} />
                       </button>
                     </div>
                   </div>
                 </div>
               )}
-            </div>
           </div>
         ))}
       </div>
